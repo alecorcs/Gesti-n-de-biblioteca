@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name = "modelo.Prestamo" table="Prestamos" catalog="biblioteca">
+		<id name= "idPrestamo">
+			<column name="prestamo_id"/>
+			<generator class="increment"/>
+		</id>
+		<property name="fechaPrestamo"></property>
+		<property name="fechaDevolucion"></property>
+		
+		  <!-- Relación con la clase Libro. Muchos préstamos pueden estar asociados a un libro-->
+        <many-to-one name="libro" class="modelo.Libro" fetch="select">
+            <column name="libro_id" not-null="true"/>
+        </many-to-one>
+        
+        <!-- Relación con la clase Lector. Muchos préstamos pueden estar asociados a un lector -->
+        <many-to-one name="lector" class="modelo.Lector" fetch="select">
+        	<!-- name = nombre de la propiedad, class = nombre de la clase de destino, column name = nombre de la columnade la tabla -->
+            <column name="lector_id" not-null="true"/>
+        </many-to-one>
+	</class>
+</hibernate-mapping>
